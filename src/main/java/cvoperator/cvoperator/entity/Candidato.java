@@ -1,10 +1,16 @@
 package cvoperator.cvoperator.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Data
 @Entity
+@Builder
 @Table(name = "candidato")
 public class Candidato {
 
@@ -26,8 +32,11 @@ public class Candidato {
     @Column(name = "esperienza",nullable = false)
     private String esperienza;
 
+    @ElementCollection
+    //@CollectionTable(name = "candidato_competenze", joinColumns = @JoinColumn(name = "candidato_id"))
+    @Builder.Default
     @Column(name = "competenze",nullable = false)
-    private String competenze;
+    private List<String> competenze = new ArrayList<>();
 
     @Column(name = "istruzione",nullable = false)
     private String istruzione;
@@ -35,4 +44,7 @@ public class Candidato {
     @OneToOne(mappedBy = "cv", cascade = CascadeType.ALL)
     private Cv cv;
 
+    public Candidato() {
+
+    }
 }

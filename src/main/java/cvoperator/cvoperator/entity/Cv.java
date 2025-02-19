@@ -19,8 +19,9 @@ public class Cv {
     @JoinColumn(name = " candidato_id", nullable = false)
     private Candidato candidato;
 
+    @Lob
     @Column(name = "documento_pdf", nullable = false)
-    private String cv;
+    private byte[] cv;
 
     @Column(name = "data_creazione", nullable = false)
     private Date dataCreazione;
